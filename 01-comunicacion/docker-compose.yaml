@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  frontend:
+    image: frontend
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      args:
+        - BASE_DIR=frontend
+    container_name: frontend-ms
+    ports:
+      - "5400:3000"
+    environment:
+      - PORT=3000
+
+  backend1:
+    image: backend1
+    build:
+      context: .
+      dockerfile: backend1/Dockerfile
+      args:
+        - BASE_DIR=backend1
+    container_name: backend1-ms
+    ports:
+      - "5500:3100"
+    environment:
+      - PORT=3100
+
+  backend2:
+    image: backend2
+    build:
+      context: .
+      dockerfile: backend2/Dockerfile
+      args:
+        - BASE_DIR=backend2
+    container_name: backend2-ms
+    ports:
+      - "5600:3200"
+    environment:
+      - PORT=3200

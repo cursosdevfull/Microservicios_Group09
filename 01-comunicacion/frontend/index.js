@@ -3,9 +3,11 @@ const app = require("./app");
 
 const server = http.createServer(app);
 
+const PORT = process.env.PORT || 19010
+
 server
-  .listen(19010)
-  .on("listening", () => console.log("Server is running on port 19010"))
+  .listen(PORT)
+  .on("listening", () => console.log(`Server is running on port ${PORT}`))
   .on("error", (error) => {
     console.log(error);
     process.exit(1);
