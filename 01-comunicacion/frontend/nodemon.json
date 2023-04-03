@@ -1,0 +1,9 @@
+{
+    "watch": ["src/"],
+    "ext": "js",
+    "execMap": {
+        "js": "node"
+    },
+    "verbose": true,
+    "restartable": "rs"
+}
