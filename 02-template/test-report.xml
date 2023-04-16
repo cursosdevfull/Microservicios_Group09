@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="D:\Cursos\Microservicios_Group09\02-template\test\unit\application\user.application.spec.ts">
+    <testCase name="UserApplication create user" duration="5"/>
+  </file>
+  <file path="D:\Cursos\Microservicios_Group09\02-template\test\unit\interfaces\user.controller.spec.ts">
+    <testCase name="UserController create user" duration="3"/>
+  </file>
+</testExecutions>

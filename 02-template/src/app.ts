@@ -29,6 +29,12 @@ class App {
   }
 
   mountErrorHandlers() {
+    this.expressApp.use((req: Request, res: Response, next: NextFunction) => {
+      const error = new IError("Not found");
+      error.status = 404;
+      next(error);
+    });
+
     this.expressApp.use(
       (err: IError, req: Request, res: Response, next: NextFunction) => {
         const objError: ResponseError = {
@@ -36,7 +42,7 @@ class App {
           message: err.message,
         };
 
-        if (Parameters.ENVIRONMENT === "development") {
+        if (Parameters.ENVIRONMENT !== "production") {
           objError.stack = err.stack;
         }
 

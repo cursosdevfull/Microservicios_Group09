@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.UserApplication=void 0;class UserApplication{constructor(e){this.repository=e}async create(e){return await this.repository.create(e)}}exports.UserApplication=UserApplication;

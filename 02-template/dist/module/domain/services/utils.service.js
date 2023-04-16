@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.UtilsService=void 0;class UtilsService{static validateEmail(e){return/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(e)}static validatePassword(e){return/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(e)}}exports.UtilsService=UtilsService;

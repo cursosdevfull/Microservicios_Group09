@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.IError=void 0;class IError extends Error{}exports.IError=IError;

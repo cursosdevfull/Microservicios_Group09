@@ -1,6 +1,7 @@
 import { Application } from "express";
 import http from "http";
 
+import logger from "../helpers/Logger";
 import Parameters from "../helpers/Parameters";
 import { Bootstrap } from "./bootstrap";
 
@@ -18,11 +19,11 @@ export default class ServerBootstrap extends Bootstrap {
         .listen(port)
         .on("listening", () => {
           resolve(true);
-          console.log(`Server is running on port ${port}`);
+          logger.info(`Server is running on port ${port}`);
         })
         .on("error", (err) => {
           reject(err);
-          console.log(`Server is not running on port ${port}`);
+          logger.info(`Server is not running on port ${port}`);
         });
     });
   }

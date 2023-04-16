@@ -4,6 +4,7 @@
 import app from "./app";
 import DatabaseBootstrap from "./bootstrap/database.bootstrap";
 import ServerBootstrap from "./bootstrap/server.bootstrap";
+import logger from "./helpers/Logger";
 
 const server = new ServerBootstrap(app);
 const database = new DatabaseBootstrap();
@@ -14,7 +15,7 @@ const database = new DatabaseBootstrap();
 
     await Promise.all(promiseBootstraps);
   } catch (error) {
-    console.error(error);
+    logger.error(error);
     process.exit(1);
   }
 })();

@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+import logger from "../helpers/Logger";
 import Parameters from "../helpers/Parameters";
 import { Bootstrap } from "./bootstrap";
 
@@ -17,11 +18,11 @@ export default class DatabaseBootstrap extends Bootstrap {
         .connect(url, options)
         .then(() => {
           resolve(true);
-          console.log("Database is connected");
+          logger.info("Database is connected");
         })
         .catch((err) => {
           reject(err);
-          console.log("Database is not connected");
+          logger.info("Database is not connected");
         });
     });
   }
