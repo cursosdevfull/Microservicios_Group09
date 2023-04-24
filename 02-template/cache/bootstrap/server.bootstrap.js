@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const http_1 = __importDefault(require("http"));
-const Logger_1 = __importDefault(require("src/helpers/Logger"));
+const Logger_1 = __importDefault(require("../helpers/Logger"));
 const Parameters_1 = __importDefault(require("../helpers/Parameters"));
 const bootstrap_1 = require("./bootstrap");
 class ServerBootstrap extends bootstrap_1.Bootstrap {

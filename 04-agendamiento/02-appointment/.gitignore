@@ -1,0 +1,6 @@
+cache
+dist
+logs
+node_modules
+reports
+test-report.xml

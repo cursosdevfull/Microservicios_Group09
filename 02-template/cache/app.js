@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const Error_1 = require("./helpers/Error");
 const Parameters_1 = __importDefault(require("./helpers/Parameters"));
 const user_application_1 = require("./module/application/user.application");
 const user_infrastructure_1 = require("./module/infrastructure/user.infrastructure");
@@ -25,12 +26,17 @@ class App {
         this.expressApp.use("/api", new routes_1.default(this.controller).router);
     }
     mountErrorHandlers() {
+        this.expressApp.use((req, res, next) => {
+            const error = new Error_1.IError("Not found");
+            error.status = 404;
+            next(error);
+        });
         this.expressApp.use((err, req, res, next) => {
             const objError = {
                 name: err.name,
                 message: err.message,
             };
-            if (Parameters_1.default.ENVIRONMENT === "development") {
+            if (Parameters_1.default.ENVIRONMENT !== "production") {
                 objError.stack = err.stack;
             }
             res.status(err.status || 500).json(objError);

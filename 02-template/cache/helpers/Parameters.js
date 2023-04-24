@@ -23,7 +23,19 @@ class Parameters {
         return process.env.MONGO_PORT || "27017";
     }
     static get ENVIRONMENT() {
-        return process.env.NODE_ENV || "development";
+        return process.env.NODE_ENV || "local";
+    }
+    static get RABBIT_HOST() {
+        return process.env.RABBIT_HOST || "localhost:5672";
+    }
+    static get EXCHANGE_NAME() {
+        return process.env.EXCHANGE_NAME || "test";
+    }
+    static get EXCHANGE_NAME_DLQ() {
+        return process.env.EXCHANGE_NAME_DLQ || "test-dlq";
+    }
+    static get ROUTING_KEY_DLQ() {
+        return process.env.ROUTING_KEY_DLQ || "test-dlq";
     }
 }
 exports.default = Parameters;
