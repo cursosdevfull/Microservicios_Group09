@@ -3,11 +3,11 @@ import { BrokerRepository } from "../domain/repositories/broker.repository";
 export class BrokerApplication {
   constructor(private readonly repository: BrokerRepository) {}
 
-  receive() {
+  /*  receive() {
     this.repository.receive();
-  }
+  } */
 
-  sent(message: unknown) {
-    this.repository.sent(message);
+  sent(message: unknown, routingKey: string) {
+    this.repository.sent(message, routingKey);
   }
 }

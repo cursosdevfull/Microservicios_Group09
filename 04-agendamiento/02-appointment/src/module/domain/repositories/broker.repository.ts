@@ -1,4 +1,4 @@
 export interface BrokerRepository {
-  sent(message: unknown): void;
-  receive(): void;
+  sent(message: unknown, routingKey: string): void;
+  //receive(): void;
 }

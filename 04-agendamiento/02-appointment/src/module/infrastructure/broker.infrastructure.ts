@@ -1,17 +1,22 @@
 import BrokerBootstrap from "../../bootstrap/broker.bootstrap";
-import logger from "../../helpers/Logger";
 import Parameters from "../../helpers/Parameters";
 import { BrokerRepository } from "../domain/repositories/broker.repository";
 
 export class BrokerInfrastructure implements BrokerRepository {
-  async sent(message: unknown) {
+  async sent(message: unknown, routingKey: string) {
     const channel = BrokerBootstrap.channel;
     const exchangeName = Parameters.EXCHANGE_NAME;
+    const exchangeType = Parameters.EXCHANGE_TYPE;
+    const exchangeOptions = { durable: false };
 
-    await channel.assertExchange(exchangeName, "direct", { durable: false });
-    channel.publish(exchangeName, "", Buffer.from(JSON.stringify(message)));
+    await channel.assertExchange(exchangeName, exchangeType, exchangeOptions);
+    channel.publish(
+      exchangeName,
+      routingKey,
+      Buffer.from(JSON.stringify(message))
+    );
   }
-  async receive() {
+  /*   async receive() {
     const channel = BrokerBootstrap.channel;
     const exchangeName = Parameters.EXCHANGE_NAME;
     const exchangeNameDLQ = Parameters.EXCHANGE_NAME_DLQ;
@@ -52,5 +57,5 @@ export class BrokerInfrastructure implements BrokerRepository {
         noAck: false,
       }
     );
-  }
+  } */
 }

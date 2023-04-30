@@ -137,6 +137,15 @@ export default class {
       req.body.refreshToken
     );
 
-    return res.json(tokens);
+    if (tokens.isErr()) {
+      const error = new IError();
+      error.message = tokens.toString();
+      error.status = 411;
+      error.stack = tokens.toString();
+
+      return next(error);
+    }
+
+    return res.json(tokens.value);
   }
 }

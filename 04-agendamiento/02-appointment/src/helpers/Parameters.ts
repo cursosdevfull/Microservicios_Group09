@@ -39,11 +39,7 @@ export default class Parameters {
     return process.env.EXCHANGE_NAME || "test";
   }
 
-  static get EXCHANGE_NAME_DLQ(): string {
-    return process.env.EXCHANGE_NAME_DLQ || "test-dlq";
-  }
-
-  static get ROUTING_KEY_DLQ(): string {
-    return process.env.ROUTING_KEY_DLQ || "test-dlq";
+  static get EXCHANGE_TYPE(): string {
+    return process.env.EXCHANGE_TYPE || "direct";
   }
 }
