@@ -1,6 +1,6 @@
 export default class Parameters {
   static get PORT(): number {
-    return +process.env.PORT || 3000;
+    return +process.env.PORT || 6100;
   }
 
   static get MONGO_USERNAME(): string {

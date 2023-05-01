@@ -1,6 +1,6 @@
 export default class Parameters {
   static get PORT(): number {
-    return +process.env.PORT || 4000;
+    return +process.env.PORT || 6000;
   }
 
   static get MONGO_USERNAME(): string {
@@ -39,19 +39,11 @@ export default class Parameters {
     return process.env.EXCHANGE_NAME || "test";
   }
 
-  static get EXCHANGE_TYPE(): string {
-    return process.env.EXCHANGE_TYPE || "direct";
-  }
-
-  static get EXCHANGE_NOTIFICATION_NAME(): string {
-    return process.env.EXCHANGE_NOTIFICATION_NAME || "test-notification";
-  }
-
   static get EXCHANGE_NAME_DLQ(): string {
     return process.env.EXCHANGE_NAME_DLQ || "test-dlq";
   }
 
   static get ROUTING_KEY_DLQ(): string {
-    return process.env.ROUTING_KEY_DLQ || "routing-dlq";
+    return process.env.ROUTING_KEY_DLQ || "test-dlq";
   }
 }

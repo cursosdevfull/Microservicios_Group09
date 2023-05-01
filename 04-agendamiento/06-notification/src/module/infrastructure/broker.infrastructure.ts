@@ -19,38 +19,19 @@ export class BrokerInfrastructure implements BrokerRepository {
   } */
   async receive() {
     const channel = BrokerBootstrap.channel;
-    const exchangeNameDLQ = Parameters.EXCHANGE_NAME_DLQ;
-    const routingKeyDLQ = Parameters.ROUTING_KEY_DLQ;
+    const exchangeNotificationName = Parameters.EXCHANGE_NOTIFICATION_NAME;
 
-    //await channel.assertExchange(exchangeName, "direct", { durable: false });
-    await channel.assertExchange(exchangeNameDLQ, "direct", { durable: false });
-
-    /*  const queue = await channel.assertQueue("", {
-      exclusive: true,
-      deadLetterExchange: exchangeNameDLQ,
-      deadLetterRoutingKey: routingKeyDLQ,
+    await channel.assertExchange(exchangeNotificationName, "direct", {
+      durable: false,
     });
-    await channel.bindQueue(queue.queue, exchangeName, "CO");
+
+    const queue = await channel.assertQueue("", { exclusive: true });
+    await channel.bindQueue(queue.queue, exchangeNotificationName, "");
 
     channel.consume(
       queue.queue,
       (message) => {
-        if (message !== null) {
-          logger.info(message.content.toString());
-          //channel.reject(message, false);
-          channel.ack(message);
-        }
-      },
-      { noAck: false }
-    ); */
-
-    const queueDLQ = await channel.assertQueue("", { exclusive: true });
-    await channel.bindQueue(queueDLQ.queue, exchangeNameDLQ, routingKeyDLQ);
-
-    channel.consume(
-      queueDLQ.queue,
-      (message) => {
-        logger.info(`message failed: ${message.content.toString()}`);
+        logger.info(`message received: ${message.content.toString()}`);
         channel.ack(message);
       },
       {

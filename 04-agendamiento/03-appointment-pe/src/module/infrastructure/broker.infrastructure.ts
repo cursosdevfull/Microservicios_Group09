@@ -17,7 +17,26 @@ export class BrokerInfrastructure implements BrokerRepository {
       Buffer.from(JSON.stringify(message))
     );
   }
-  async receive() {
+
+  async sentNotification(message: unknown, routingKey: string) {
+    const channel = BrokerBootstrap.channel;
+    const exchangeNotificationName = Parameters.EXCHANGE_NOTIFICATION_NAME;
+    const exchangeType = Parameters.EXCHANGE_TYPE;
+    const exchangeOptions = { durable: false };
+
+    await channel.assertExchange(
+      exchangeNotificationName,
+      exchangeType,
+      exchangeOptions
+    );
+    channel.publish(
+      exchangeNotificationName,
+      routingKey,
+      Buffer.from(JSON.stringify(message))
+    );
+  }
+
+  async receive(consumer: (message: any) => void) {
     const channel = BrokerBootstrap.channel;
     const exchangeName = Parameters.EXCHANGE_NAME;
     const exchangeNameDLQ = Parameters.EXCHANGE_NAME_DLQ;
@@ -33,17 +52,7 @@ export class BrokerInfrastructure implements BrokerRepository {
     });
     await channel.bindQueue(queue.queue, exchangeName, "PE");
 
-    channel.consume(
-      queue.queue,
-      (message) => {
-        if (message !== null) {
-          logger.info(message.content.toString());
-          //channel.reject(message, false);
-          channel.ack(message);
-        }
-      },
-      { noAck: false }
-    );
+    channel.consume(queue.queue, consumer, { noAck: false });
 
     const queueDLQ = await channel.assertQueue("", { exclusive: true });
     await channel.bindQueue(queueDLQ.queue, exchangeNameDLQ, routingKeyDLQ);

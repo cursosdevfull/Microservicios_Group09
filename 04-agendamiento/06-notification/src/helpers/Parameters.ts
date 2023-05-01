@@ -1,6 +1,6 @@
 export default class Parameters {
   static get PORT(): number {
-    return +process.env.PORT || 5600;
+    return +process.env.PORT || 5700;
   }
 
   static get MONGO_USERNAME(): string {
@@ -35,19 +35,7 @@ export default class Parameters {
     return process.env.RABBIT_HOST || "localhost:5672";
   }
 
-  /*   static get EXCHANGE_NAME(): string {
-    return process.env.EXCHANGE_NAME || "test";
-  }
-
-  static get EXCHANGE_TYPE(): string {
-    return process.env.EXCHANGE_TYPE || "direct";
-  } */
-
-  static get EXCHANGE_NAME_DLQ(): string {
-    return process.env.EXCHANGE_NAME_DLQ || "test-dlq";
-  }
-
-  static get ROUTING_KEY_DLQ(): string {
-    return process.env.ROUTING_KEY_DLQ || "routing-dlq";
+  static get EXCHANGE_NOTIFICATION_NAME(): string {
+    return process.env.EXCHANGE_NOTIFICATION_NAME || "test-notification";
   }
 }
