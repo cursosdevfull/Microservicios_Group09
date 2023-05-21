@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-app
+spec:
+  replicas: 7
+  selector:
+    matchLabels:
+      app: frontend
+      env: dev
+  template:
+    metadata:
+      labels:
+        app: frontend
+        env: dev
+    spec:
+      containers:
+        - name: web01
+          image: python:3.7-alpine
+          command:
+            [
+              "sh",
+              "-c",
+              "echo 'contenedor web01'  > index.html && python -m http.server 8081",
+            ]

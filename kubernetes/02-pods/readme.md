@@ -33,6 +33,12 @@ kubectl describe po <nombre pod>
 kubectl logs <nombre pod>
 ```
 
+### Para obtener el log de un contenedor en un pod
+
+```
+kubectl logs <nombre pod> -c <nombre contenedor>
+```
+
 ### Para eliminar un manifiesto
 
 ```

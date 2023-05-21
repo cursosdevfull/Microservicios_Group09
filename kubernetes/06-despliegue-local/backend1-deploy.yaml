@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend1-deploy
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: backend1-app
+  template:
+    metadata:
+      labels:
+        app: backend1-app
+    spec:
+      containers:
+        - name: backend1
+          image: localhost:5000/backend1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3100
+          env:
+            - name: PORT_BACKEND1
+              value: "3100"
+            - name: SERVICE_BACKEND2
+              value: http://backend2-svc/api/message
