@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nsp-uat
+  labels:
+    env: uat
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nsp-stg
+  labels:
+    env: stg
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nsp-prd
+  labels:
+    env: prd

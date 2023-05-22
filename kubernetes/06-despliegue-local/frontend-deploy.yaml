@@ -22,4 +22,4 @@ spec:
             - name: PORT_FRONTEND
               value: "3000"
             - name: SERVICE_BACKEND1
-              value: http://backend1-svc/api
+              value: /api/message
