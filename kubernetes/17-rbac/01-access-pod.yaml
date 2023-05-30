@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nsp-dev
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: nsp-dev
+  name: dev-reader
+rules:
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "watch", "list"]
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get", "watch", "list"]
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["get", "watch", "list", "patch", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: read-pods
+  namespace: nsp-dev
+subjects:
+  - kind: User
+    name: cursosdev
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: dev-reader
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webserver
+  namespace: nsp-dev
+spec:
+  containers:
+    - name: web
+      image: nginx:alpine
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-app
+  namespace: nsp-dev
+spec:
+  replicas: 7
+  selector:
+    matchLabels:
+      app: frontend
+      env: dev
+  template:
+    metadata:
+      namespace: nsp-dev
+      labels:
+        app: frontend
+        env: dev
+    spec:
+      containers:
+        - name: web01
+          image: python:3.7-alpine
+          command:
+            [
+              "sh",
+              "-c",
+              "echo 'contenedor web01'  > index.html && python -m http.server 8081",
+            ]
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: connection-parameters
+  namespace: nsp-dev
+data:
+  db_host: dev.host.local
+  db_user: dev.user
+  db_pass: dev.pass

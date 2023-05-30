@@ -9,7 +9,7 @@ kubectl config current-context
 ### Para listar los contextos
 
 ```
-kubectl config view
+kubectl config set-credentials cursosdev --client-certificate=cursosdev.crt --client-key=cursosdev.key
 ```
 
 ### Crear un contexto
